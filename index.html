@@ -266,12 +266,12 @@
     </div>
 
     <form id="asthma-form" onsubmit="handleFormSubmit(event)">
-        <!-- Container for Questions 1-10 -->
+        <!-- Dynamic Questions Container -->
         <div id="questions-container"></div>
 
-        <!-- Question 11 Mic Section -->
+        <!-- Question 9 Mic Section -->
         <div class="mic-section">
-            <h3 id="q11-title">11. اختبار الميكروفون المتقدم (تحليل صوت الصدر بالذكاء الاصطناعي)</h3>
+            <h3 id="q11-title">9. اختبار الميكروفون المتقدم (تحليل صوت الصدر بالذكاء الاصطناعي)</h3>
             <p id="q11-desc">الرجاء الضغط على الزر أدناه والتنفس بعمق وقوة في الميكروفون لمدة 4 ثوانٍ ليقوم النظام بفحص صوت التزيق أو الإجهاد الحاد.</p>
             <button type="button" id="mic-status-btn" class="mic-btn" onclick="startBreathingAnalysis()">ابدأ التسجيل والتحليل</button>
         </div>
@@ -288,6 +288,8 @@
             title: "استبيان فحص أعراض الربو الذكي",
             subtitle: "مدعوم بالذكاء الاصطناعي لمدارس الصدارة",
             points: "10 نقاط",
+            
+            // New 4 Questions
             q1: "1. هل تعاني من كحة مستمرة منذ أكثر من 3 أيام؟",
             q1_o1: "لا",
             q1_o2: "نعم، كحة جافة",
@@ -308,37 +310,28 @@
             q4_o2: "ألم بسيط",
             q4_o3: "نعم، ألم حاد وواضح",
             
-            q5: "5. هل تسمع صوت صفير أو \"تزيق\" في الصدر أثناء التنفس؟",
-            q5_o1: "لا، لا يوجد أي صوت صفير",
-            q5_o2: "نعم، أحياناً عند النوم أو التعرض لغبار",
-            q5_o3: "نعم، صوت واضح ومستمر يسبب لي الضيق",
+            // Retained Original Questions
+            q5: "5. هل يوجد صوت صفير أو تزيق بالصدر أثناء التنفس؟",
+            q5_o1: "لا يوجد",
+            q5_o2: "أحياناً بشكل خفيف",
+            q5_o3: "نعم، صوت واضح ومستمر",
             
-            q6: "6. كم مرة استيقظت من النوم خلال الأسبوع الماضي بسبب ضيق التنفس أو الكحة؟",
-            q6_o1: "لم أستيقظ أبداً",
-            q6_o2: "مرة أو مرتين خلال الأسبوع",
-            q6_o3: "أكثر من 3 مرات أو بشكل شبه يومي",
+            q6: "6. هل تجد صعوبة في الكلام العادي بسبب مشاكل التنفس؟",
+            q6_o1: "لا، أتكلم بشكل طبيعي",
+            q6_o2: "صعوبة بسيطة تظهر عند بذل مجهود",
+            q6_o3: "نعم، أجد صعوبة بالغة في إكمال جملة واحدة",
             
-            q7: "7. هل تزداد هذه الأعراض سوءاً عند التعرض للمثيرات (مثل الروائح القوية، البخور، الغبار، أو الحيوانات البرية)؟",
-            q7_o1: "لا، لا تتأثر",
-            q7_o2: "نعم، أشعر بزيادة بسيطة في الكحة",
-            q7_o3: "نعم، تسبب لي أزمة تنفسية حادة فوراً",
+            q7: "7. هل تشعر بضغط أو ألم مستمر في منطقة الصدر؟",
+            q7_o1: "لا أشعر بأي ضغط",
+            q7_o2: "ضغط خفيف من وقت لآخر",
+            q7_o3: "نعم، ضغط شديد ومزعج للغاية",
             
-            q8: "8. هل تحتاج إلى استخدام بخاخ الربو الإسعافي (مثل الفنتولين) بشكل متكرر؟",
-            q8_o1: "لا أستخدمه / لا أحتاجه",
-            q8_o2: "نعم، أستخدمه من وقت لآخر (أقل من 3 مرات أسبوعياً)",
-            q8_o3: "نعم، أستخدمه بكثرة ويومياً تقريباً ولا أشعر بالراحة",
-            
-            q9: "9. هل تؤثر أعراض التنفس الحالية على قدرتك على الذهاب للمدرسة أو ممارسة أنشطتك اليومية؟",
-            q9_o1: "لا تؤثر تماماً",
-            q9_o2: "تؤثر بشكل طفيف وأستطيع التحمل",
-            q9_o3: "نعم، تمنعني تماماً من الحركة والتركيز",
-            
-            q10: "10. هل يوجد تاريخ عائلي مصاب بمرض الربو أو الحساسية الصدرية الحادة؟",
-            q10_o1: "لا يوجد",
-            q10_o2: "نعم، أحد الأقارب من الدرجة الثانية",
-            q10_o3: "نعم، الوالدان أو أحد الإخوة مصاب بشكل مؤكد",
+            q8: "8. هل استيقظت من النوم خلال الفترة الماضية بسبب نوبة ضيق التنفس أو الكحة؟",
+            q8_o1: "لم أستيقظ أبداً",
+            q8_o2: "مرة أو مرتين كحد أقصى",
+            q8_o3: "نعم، استيقظ متكرر وشبه يومي",
 
-            q11_t: "11. اختبار الميكروفون المتقدم (تحليل صوت الصدر بالذكاء الاصطناعي)",
+            q11_t: "9. اختبار الميكروفون المتقدم (تحليل صوت الصدر بالذكاء الاصطناعي)",
             q11_d: "الرجاء الضغط على الزر أدناه والتنفس بعمق وقوة في الميكروفون لمدة 4 ثوانٍ ليقوم النظام بفحص صوت التزيق أو الإجهاد الحاد.",
             btn_start: "ابدأ التسجيل والتحليل",
             btn_process: "جاري تحليل نمط التنفس وعزل الصوت عبر الذكاء الاصطناعي...",
@@ -351,6 +344,8 @@
             title: "AI Asthma Symptom Checker",
             subtitle: "Powered by AI for Assadarah Schools",
             points: "10 points",
+            
+            // New 4 Questions
             q1: "1. Have you been experiencing a persistent cough for more than 3 days?",
             q1_o1: "No",
             q1_o2: "Yes, dry cough",
@@ -363,45 +358,36 @@
             
             q3: "3. Have you experienced a sudden high fever (above 38°C) accompanied by chills?",
             q3_o1: "No",
-            q3_o2: "Yes, Suddenly once",
+            q3_o2: "Yes, suddenly once",
             q3_o3: "Yes, and not relieved by antipyretics",
             
             q4: "4. Do you feel a \"sharp, stabbing\" pain in your chest when taking a deep breath or coughing?",
             q4_o1: "No",
-            q4_o2: "Mild Pain",
-            q4_o3: "YES SEVERE PAIN",
+            q4_o2: "Mild pain",
+            q4_o3: "Yes, severe sharp pain",
             
-            q5: "5. Do you hear a whistling or \"wheezing\" sound in your chest while breathing?",
-            q5_o1: "No whistling or wheezing sounds",
-            q5_o2: "Yes, sometimes when sleeping or exposed to dust",
-            q5_o3: "Yes, clear and continuous sound causing discomfort",
+            // Retained Original Questions
+            q5: "5. Is there a whistling or wheezing sound in your chest while breathing?",
+            q5_o1: "No noise",
+            q5_o2: "Sometimes mild",
+            q5_o3: "Yes, clear and continuous",
             
-            q6: "6. How many times did you wake up from sleep last week due to shortness of breath or coughing?",
-            q6_o1: "Never woke up",
-            q6_o2: "Once or twice during the week",
-            q6_o3: "More than 3 times or almost daily",
+            q6: "6. Do you find difficulty speaking normally because of breathing issues?",
+            q6_o1: "No, speaking normally",
+            q6_o2: "Slight difficulty during conversation",
+            q6_o3: "Yes, struggling to complete a single sentence",
             
-            q7: "7. Do these symptoms get worse when exposed to triggers (e.g., strong odors, incense, dust, or animals)?",
-            q7_o1: "No, they are not affected",
-            q7_o2: "Yes, I feel a slight increase in coughing",
-            q7_o3: "Yes, it triggers an acute respiratory crisis immediately",
+            q7: "7. Do you feel continuous pressure or pain in your chest area?",
+            q7_o1: "No pressure felt",
+            q7_o2: "Mild tightness from time to time",
+            q7_o3: "Yes, severe and highly uncomfortable pressure",
             
-            q8: "8. Do you need to use a rescue inhaler (like Ventolin) frequently?",
-            q8_o1: "No, I do not use/need it",
-            q8_o2: "Yes, I use it occasionally (less than 3 times a week)",
-            q8_o3: "Yes, I use it heavily, almost daily, and feel no relief",
-            
-            q9: "9. Do your current breathing symptoms affect your ability to go to school or perform daily activities?",
-            q9_o1: "Does not affect at all",
-            q9_o2: "Slightly affects, but manageable",
-            q9_o3: "Yes, completely prevents me from moving or focusing",
-            
-            q10: "10. Is there a verified family history of asthma or severe respiratory allergies?",
-            q10_o1: "No family history",
-            q10_o2: "Yes, a second-degree relative",
-            q10_o3: "Yes, parents or one of the siblings confirmed",
+            q8: "8. Have you woken up from sleep recently due to short of breath or coughing fits?",
+            q8_o1: "Never woke up",
+            q8_o2: "Once or twice at most",
+            q8_o3: "Yes, frequent or almost daily waking",
 
-            q11_t: "11. Advanced Microphone Check (AI Chest Sound Analysis)",
+            q11_t: "9. Advanced Microphone Check (AI Chest Sound Analysis)",
             q11_d: "Please click the button below and breathe deeply into your microphone for 4 seconds so the system can analyze your breathing rhythms for wheezing or distress signatures.",
             btn_start: "Start Recording & Analysis",
             btn_process: "AI is analyzing breathing patterns and noise isolating...",
@@ -427,9 +413,8 @@
         document.getElementById("submit-button").innerText = dictionary[currentLang].submit;
 
         let questionsHTML = '';
-        
-        // Loop to generate markup dynamically for all 10 selection questions
-        for (let i = 1; i <= 10; i++) {
+        // Loops through all 8 choice-based questions seamlessly
+        for (let i = 1; i <= 8; i++) {
             questionsHTML += `
                 <div class="question-card">
                     <div class="question-title">
@@ -526,8 +511,7 @@
         event.preventDefault();
         
         let pointCalculationSum = 0;
-        // Updated condition to safely map all 10 questions into total calculation
-        for(let i = 1; i <= 10; i++) {
+        for(let i = 1; i <= 8; i++) {
             let checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
             if(checkedRadio) {
                 pointCalculationSum += parseInt(checkedRadio.value);
@@ -537,8 +521,8 @@
         const outputContainer = document.getElementById("result-display");
         outputContainer.style.display = "block";
 
-        // Threshold optimized for 10 structural assessment metrics
-        if (pointCalculationSum >= 45 || audioAnomalyDetected) {
+        // Logic adjusted for 8 active questionnaire fields (Max 80 points)
+        if (pointCalculationSum >= 35 || audioAnomalyDetected) {
             outputContainer.className = "alert-danger";
             outputContainer.innerText = dictionary[currentLang].danger_msg;
         } else {
