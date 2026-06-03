@@ -245,16 +245,22 @@
             border-left: 4px solid #333;
         }
 
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
         .alert-success {
             background-color: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
         .submit-btn {
@@ -293,9 +299,8 @@
     <form id="asthma-form" onsubmit="handleFormSubmit(event)">
         <div id="questions-container"></div>
 
-        <!-- Question 9 Mic Section -->
         <div class="mic-section">
-            <h3 id="q11-title">9. اختبار الميكروفون المتقدم (تحليل صوت الصدر بالذكاء الاصطناعي)</h3>
+            <h3 id="q11-title">9. اختبار الميكروفون المتقدم (تحليل النمط التنفسي)</h3>
             <p id="q11-desc">الرجاء الضغط على الزر أدناه والتنفس أو السعال بوضوح في الميكروفون لمدة 4 ثوانٍ ليقوم النظام بتحليل حالتك.</p>
             <button type="button" id="mic-status-btn" class="mic-btn" onclick="startBreathingAnalysis()">ابدأ التسجيل والتحليل</button>
         </div>
@@ -333,7 +338,7 @@
             q4_o2: "ألم بسيط",
             q4_o3: "نعم، ألم حاد وواضح",
             
-            q5: "5. هل يوجد صوت صفير أو تزيق بالصدر أثناء التنفس？",
+            q5: "5. هل يوجد صوت صفير أو تزيق بالصدر أثناء التنفس؟",
             q5_o1: "لا يوجد",
             q5_o2: "أحياناً بشكل خفيف",
             q5_o3: "نعم، صوت واضح ومستمر",
@@ -353,24 +358,25 @@
             q8_o2: "مرة أو مرتين كحد أقصى",
             q8_o3: "نعم، استيقظ متكرر وشبه يومي",
 
-            q11_t: "9. اختبار الميكروفون المتقدم (تحليل نمط الصدر الرقمي)",
+            q11_t: "9. اختبار الميكروفون المتقدم (تحليل النمط التنفسي والترددات)",
             q11_d: "الرجاء الضغط على الزر أدناه والتنفس أو السعال في الميكروفون لمدة 4 ثوانٍ ليقوم النظام بفحص نمط الصوت وعزله.",
             btn_start: "ابدأ التسجيل والتحليل",
-            btn_process: "جاري تحليل الإيقاع والترددات الصوتية...",
+            btn_process: "جاري عزل الترددات وتحليل الإيقاع التنفسي المستمر...",
             btn_done: "تم التحليل بنجاح ✔",
             submit: "عرض النتيجة الحيوية",
             
             res_head: "تقرير التحليل الطبي الرقمي",
             res_score: "مجموع نقاط الاستبيان: ",
-            res_mic_title: "حالة فحص الميكروفون: ",
+            res_mic_title: "حالة فحص الميكروفون الفنية: ",
             
-            status_normal: "✅ نمط التنفس طبيعي ومستقر تماماً.",
-            status_fast: "⚠️ تم رصد نمط تنفس متسارع (Fast Breathing)!",
-            status_cough: "⚠️ تم رصد نوبات سعال مفاجئة ومتقطعة (Coughing)!",
-            status_wheeze: "🚨 تحذير خطير: تم رصد صوت تزيق وصفير حاد بالصدر (Wheezing)!",
+            status_normal: "✅ نمط التنفس طبيعي ومستقر تماماً (Normal).",
+            status_fast: "⚠️ تم رصد نمط تنفس متسارع وحاد (Fast Breathing)!",
+            status_cough: "⚠️ تم رصد نوبات سعال متقطعة ومفاجئة (Coughing)!",
+            status_wheeze: "🚨 تحذير خطير: تم رصد إشارات تزيق وصفير حاد بالصدر (Wheezing)!",
             
             safe_msg: "النتيجة النهائية: وضعك مستقر حالياً ولا توجد علامات طارئة خطيرة. يرجى المتابعة وأخذ قسط من الراحة.",
-            danger_msg: "تحذير طوارئ: رصد نمط صوتي غير مستقر أو مجموع نقاط مرتفع. يرجى مراجعة الرعاية الطبية المختصة."
+            warning_msg: "تنبيه صحي: تم رصد مؤشرات حيوية متوسطة الخطورة (سعال أو تنفس سريع). يرجى الانتباه والراحة.",
+            danger_msg: "تحذير طوارئ: رصد نمط تنفس غير مستقر حاد (تزيق بالصدر). يرجى مراجعة الرعاية الطبية المختصة فوراً."
         },
         en: {
             title: "AI Asthma Symptom Checker",
@@ -394,7 +400,7 @@
             
             q4: "4. Do you feel a \"sharp, stabbing\" pain in your chest when taking a deep breath or coughing?",
             q4_o1: "No",
-            -- q4_o2: "Mild pain",
+            q4_o2: "Mild pain",
             q4_o3: "Yes, severe sharp pain",
             
             q5: "5. Is there a whistling or wheezing sound in your chest while breathing?",
@@ -417,7 +423,7 @@
             q8_o2: "Once or twice at most",
             q8_o3: "Yes, frequent or almost daily waking",
 
-            q11_t: "9. Advanced Microphone Check (Digital Rhythm Analysis)",
+            q11_t: "9. Advanced Microphone Check (Respiratory Tracking)",
             q11_d: "Please click the button below and breathe or cough clearly into your microphone for 4 seconds so the system can analyze your respiratory tracking.",
             btn_start: "Start Recording & Analysis",
             btn_process: "Analyzing sound rhythms and frequency intervals...",
@@ -428,18 +434,19 @@
             res_score: "Total Survey Score: ",
             res_mic_title: "Microphone Scan Status: ",
             
-            status_normal: "✅ Breathing pattern is completely normal and stable.",
+            status_normal: "✅ Breathing pattern is completely normal and stable (Normal).",
             status_fast: "⚠️ Accelerated rhythmic breathing pattern detected (Fast Breathing)!",
             status_cough: "⚠️ Sudden staggered audio bursts detected (Coughing)!",
             status_wheeze: "🚨 CRITICAL WARNING: High pitched whistling detected (Wheezing)!",
             
             safe_msg: "Final Verdict: Your status is currently stable. No emergency alert triggered. Please take rest.",
-            danger_msg: "EMERGENCY WARNING: Abnormal acoustic signatures or high metrics detected. Please seek professional evaluation."
+            warning_msg: "Health Alert: Moderate indicators observed (Coughing or Fast Breathing). Please rest well.",
+            danger_msg: "EMERGENCY WARNING: Critical whistling parameters (Wheezing) detected. Please seek professional evaluation immediately."
         }
     };
 
     let currentLang = 'ar';
-    let detailedAudioStatus = "normal"; // Options: "normal", "fast", "cough", "wheeze"
+    let detailedAudioStatus = "normal"; // "normal", "fast", "cough", "wheeze"
 
     function renderForm() {
         document.documentElement.lang = currentLang;
@@ -527,7 +534,6 @@
                     let data = new Uint8Array(analyser.frequencyBinCount);
                     analyser.getByteFrequencyData(data);
                     
-                    // 1. Calculate general current volume amplitude
                     let totalSum = 0;
                     for(let i = 0; i < data.length; i++) {
                         totalSum += data[i];
@@ -535,7 +541,6 @@
                     let avgVol = totalSum / data.length;
                     volumeTimeline.push(avgVol);
 
-                    // 2. Track specific high-pitch whistling frequency bins (Wheezing signature)
                     let highFreqSum = 0;
                     for(let i = Math.floor(data.length * 0.6); i < data.length; i++) {
                         highFreqSum += data[i];
@@ -547,11 +552,9 @@
                     stream.getTracks().forEach(track => track.stop());
                     audioContext.close();
                     
-                    // --- PATTERN CLASSIFICATION ENGINE ---
                     let totalSpikes = 0;
                     let isAboveBase = false;
                     
-                    // Count audio activity rhythmic pulses (spikes) over time
                     for (let i = 1; i < volumeTimeline.length; i++) {
                         if (volumeTimeline[i] > 3 && !isAboveBase) {
                             totalSpikes++;
@@ -563,13 +566,12 @@
 
                     let maxHighFreq = Math.max(...highFrequencyTimeline);
 
-                    // Decision tree based entirely on frequency and rhythm, not loudness
+                    // Pure rhythm pattern logic mapping
                     if (maxHighFreq > 8) {
                         detailedAudioStatus = "wheeze";
                     } else if (totalSpikes >= 6 && totalSpikes <= 12) {
                         detailedAudioStatus = "fast";
                     } else if (totalSpikes > 0 && totalSpikes < 5) {
-                        // Sudden short block bursts match coughing
                         detailedAudioStatus = "cough";
                     } else {
                         detailedAudioStatus = "normal";
@@ -582,7 +584,7 @@
             })
             .catch(function(err) {
                 setTimeout(() => {
-                    detailedAudioStatus = "fast"; // Default dummy status on browser mock failures
+                    detailedAudioStatus = "fast";
                     btn.innerText = dictionary[currentLang].btn_done;
                     btn.disabled = false;
                 }, 2000);
@@ -604,18 +606,27 @@
         const outputContainer = document.getElementById("result-display");
         outputContainer.style.display = "block";
 
-        let audioIsBad = (detailedAudioStatus === "fast" || detailedAudioStatus === "cough" || detailedAudioStatus === "wheeze");
-        let isDangerous = (pointCalculationSum >= 35 || audioIsBad);
-        
-        outputContainer.className = isDangerous ? "alert-danger" : "alert-success";
+        // Assigning exact color themes depending on the result status
+        if (detailedAudioStatus === "normal") {
+            outputContainer.className = "alert-success"; // Green Box
+        } else if (detailedAudioStatus === "fast" || detailedAudioStatus === "cough") {
+            outputContainer.className = "alert-warning"; // Yellow Box
+        } else if (detailedAudioStatus === "wheeze") {
+            outputContainer.className = "alert-danger"; // Red Box
+        }
 
-        // Map status variable to localized text strings
         let finalMicString = dictionary[currentLang].status_normal;
         if (detailedAudioStatus === "fast") finalMicString = dictionary[currentLang].status_fast;
         if (detailedAudioStatus === "cough") finalMicString = dictionary[currentLang].status_cough;
         if (detailedAudioStatus === "wheeze") finalMicString = dictionary[currentLang].status_wheeze;
 
-        let finalVerdictText = isDangerous ? dictionary[currentLang].danger_msg : dictionary[currentLang].safe_msg;
+        let finalVerdictText = dictionary[currentLang].safe_msg;
+        if (detailedAudioStatus === "fast" || detailedAudioStatus === "cough" || pointCalculationSum >= 25) {
+            finalVerdictText = dictionary[currentLang].warning_msg;
+        }
+        if (detailedAudioStatus === "wheeze" || pointCalculationSum >= 45) {
+            finalVerdictText = dictionary[currentLang].danger_msg;
+        }
 
         outputContainer.innerHTML = `
             <div class="result-title">${dictionary[currentLang].res_head}</div>
