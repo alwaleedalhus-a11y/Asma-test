@@ -90,6 +90,11 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 15px;
+            text-align: right;
+        }
+
+        html[dir="ltr"] .question-title {
+            text-align: left;
         }
 
         .points-tag {
@@ -107,14 +112,21 @@
         }
 
         .option-label {
-            display: block;
+            display: flex;
+            align-items: center;
             position: relative;
-            padding: 10px 35px;
+            padding: 12px 40px;
             margin-bottom: 8px;
             cursor: pointer;
             background: white;
             border: 1px solid #ddd;
             border-radius: 6px;
+            text-align: right;
+            font-size: 1rem;
+        }
+
+        html[dir="ltr"] .option-label {
+            text-align: left;
         }
 
         .option-label input {
@@ -124,21 +136,38 @@
 
         .checkmark {
             position: absolute;
-            top: 12px;
-            left: 12px;
-            height: 16px;
-            width: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 18px;
+            width: 18px;
             background-color: #eee;
+            border: 1px solid #ccc;
             border-radius: 50%;
         }
 
         html[dir="rtl"] .checkmark {
-            left: auto;
-            right: 12px;
+            right: 15px;
+        }
+
+        html[dir="ltr"] .checkmark {
+            left: 15px;
         }
 
         .option-label input:checked ~ .checkmark {
             background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .option-label input:checked ~ .checkmark:after {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 5px;
+            left: 5px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: white;
         }
 
         .mic-section {
@@ -230,17 +259,20 @@
 
     <div class="header-section">
         <div class="logo-container">
-            <img src="logo.png" alt="Logo 1" class="logo-placeholder" onerror="this.style.display='none'">
-            <img src="logo2.png" alt="Logo 2" class="logo-placeholder" onerror="this.style.display='none'">
-            <img src="logo3.png" alt="Logo 3" class="logo-placeholder" onerror="this.style.display='none'">
+            <!-- Ensure images point to correct URLs or names on your server -->
+            <img src="logo.png" alt="Logo 1" class="logo-placeholder" onerror="this.style.opacity='0'">
+            <img src="logo2.png" alt="Logo 2" class="logo-placeholder" onerror="this.style.opacity='0'">
+            <img src="logo3.png" alt="Logo 3" class="logo-placeholder" onerror="this.style.opacity='0'">
         </div>
         <h1 id="main-title">استبيان فحص أعراض الربو الذكي</h1>
         <p id="main-subtitle">مدعوم بالذكاء الاصطناعي لمدارس الصدارة</p>
     </div>
 
     <form id="asthma-form" onsubmit="handleFormSubmit(event)">
+        <!-- The 8 dynamic questions will render perfectly here -->
         <div id="questions-container"></div>
 
+        <!-- Question 9 Mic Section -->
         <div class="mic-section">
             <h3 id="q11-title">9. اختبار الميكروفون الذكي (عزل منحنيات التزيق والسعال)</h3>
             <p id="q11-desc">الرجاء الضغط على الزر أدناه والتنفس أو السعال بوضوح في الميكروفون لمدة 4 ثوانٍ ليقوم النظام بتحليل نمط المنحنى الموجي الفعلي.</p>
@@ -261,11 +293,11 @@
             points: "10 نقاط",
             q1: "1. هل تعاني من كحة مستمرة منذ أكثر من 3 أيام؟",
             q1_o1: "لا", q1_o2: "نعم، كحة جافة", q1_o3: "نعم، كحة ببلغم (أخضر أو أصفر)",
-            q2: "2. هل تشعر بـ \"نهجان\" أو ضيق تنفس عند القيام بمجهود بسيط (مثل صعود السلم)؟",
+            q2: "2. هل تشعر بـ \"نهجان\" أو ضيق تنفس عند القيام بمجهود بسيط (مثل صعود السلم)？",
             q2_o1: "لا", q2_o2: "نعم، تشعر بتعب غير معتاد", q2_o3: "نعم، أشعر بضيق حتى وأنا جالس",
             q3: "3. هل عانيت من ارتفاع مفاجئ في درجة الحرارة (أكثر من 38) مع رعشة؟",
             q3_o1: "لا", q3_o2: "نعم، مرة واحدة", q3_o3: "نعم، لا تنخفض حتى بخافض حرارة",
-            q4: "4. هل تشعر بألم \"مثل النغزة\" في صدرك عند أخذ نفس عميق أو الكحة？",
+            q4: "4. هل تشعر بألم \"مثل النغزة\" في صدرك عند أخذ نفس عميق أو الكحة؟",
             q4_o1: "لا", q4_o2: "ألم بسيط", q4_o3: "نعم، ألم حاد وواضح",
             q5: "5. هل يوجد صوت صفير أو تزيق بالصدر أثناء التنفس؟",
             q5_o1: "لا يوجد", q5_o2: "أحياناً بشكل خفيف", q5_o3: "نعم، صوت واضح ومستمر",
@@ -309,4 +341,229 @@
             q6: "6. Do you find difficulty speaking normally because of breathing issues?",
             q6_o1: "No", q6_o2: "Slight difficulty", q6_o3: "Yes, severe difficulty",
             q7: "7. Do you feel continuous pressure or pain in your chest area?",
-            q7_o1: "No", q7_o
+            q7_o1: "No", q7_o2: "Mild tightness", q7_o3: "Yes, severe pressure",
+            q8: "8. Have you woken up from sleep recently due to breathing fits?",
+            q8_o1: "Never", q8_o2: "Once or twice", q8_o3: "Yes, frequently",
+            q11_t: "9. Advanced Microphone Check (Spectral Distribution Logic)",
+            q11_d: "Click below and record. The updated algorithm isolates proximity wind clipping noise from true symptoms.",
+            btn_start: "Start Recording & Analysis",
+            btn_process: "Isolating proximity wind metrics and scanning harmonic distribution...",
+            btn_done: "Analysis Completed ✔",
+            submit: "View Vital Analysis Results",
+            res_head: "Digital Medical Analysis Report",
+            res_score: "Total Survey Score: ",
+            res_mic_title: "Microphone Scan Status: ",
+            status_normal: "✅ Breathing pattern is completely normal and stable (Normal).",
+            status_fast: "⚠️ Accelerated rhythmic wave pattern detected (Fast Breathing)!",
+            status_cough: "⚠️ True acoustic explosive cough signature detected (Coughing Detected)!",
+            status_wheeze: "🚨 CRITICAL WARNING: True sustained harmonic whistle detected (Wheezing)!",
+            safe_msg: "Final Verdict: Your status is currently stable. No emergency alert triggered.",
+            warning_msg: "Health Alert: Sudden structural cough or rapid breathing patterns identified.",
+            danger_msg: "EMERGENCY WARNING: True continuous narrow-band wheezing detected. Seek evaluation."
+        }
+    };
+
+    let currentLang = 'ar';
+    let detailedAudioStatus = "normal";
+
+    function renderForm() {
+        document.documentElement.lang = currentLang;
+        document.documentElement.dir = (currentLang === 'ar') ? 'rtl' : 'ltr';
+
+        document.getElementById("main-title").innerText = dictionary[currentLang].title;
+        document.getElementById("main-subtitle").innerText = dictionary[currentLang].subtitle;
+        document.getElementById("q11-title").innerText = dictionary[currentLang].q11_t;
+        document.getElementById("q11-desc").innerText = dictionary[currentLang].q11_d;
+        document.getElementById("mic-status-btn").innerText = (detailedAudioStatus !== "normal") ? dictionary[currentLang].btn_done : dictionary[currentLang].btn_start;
+        document.getElementById("submit-button").innerText = dictionary[currentLang].submit;
+
+        let questionsHTML = '';
+        for (let i = 1; i <= 8; i++) {
+            questionsHTML += `
+                <div class="question-card">
+                    <div class="question-title">
+                        ${dictionary[currentLang]['q' + i]}
+                        <span class="points-tag">${dictionary[currentLang].points}</span>
+                        <span class="required-star">*</span>
+                    </div>
+                    <label class="option-label">
+                        <input type="radio" name="q${i}" value="0" required>
+                        <span class="checkmark"></span>
+                        <span>${dictionary[currentLang]['q' + i + '_o1']}</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q${i}" value="5">
+                        <span class="checkmark"></span>
+                        <span>${dictionary[currentLang]['q' + i + '_o2']}</span>
+                    </label>
+                    <label class="option-label">
+                        <input type="radio" name="q${i}" value="10">
+                        <span class="checkmark"></span>
+                        <span>${dictionary[currentLang]['q' + i + '_o3']}</span>
+                    </label>
+                </div>
+            `;
+        }
+        document.getElementById("questions-container").innerHTML = questionsHTML;
+    }
+
+    function toggleLanguage(lang) {
+        currentLang = lang;
+        renderForm();
+        document.getElementById("result-display").style.display = "none";
+    }
+
+    function startBreathingAnalysis() {
+        const btn = document.getElementById("mic-status-btn");
+        btn.innerText = dictionary[currentLang].btn_process;
+        btn.disabled = true;
+
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } })
+            .then(async function(stream) {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const analyser = audioContext.createAnalyser();
+                const source = audioContext.createMediaStreamSource(stream);
+                const processor = audioContext.createScriptProcessor(2048, 1, 1);
+
+                analyser.fftSize = 512;
+                source.connect(analyser);
+                analyser.connect(processor);
+                processor.connect(audioContext.destination);
+
+                let lowBassHistory = [];
+                let midHighHistory = [];
+                let spectralPeakHistory = [];
+
+                processor.onaudioprocess = function() {
+                    let data = new Uint8Array(analyser.frequencyBinCount);
+                    analyser.getByteFrequencyData(data);
+                    
+                    let lowBassSum = 0;
+                    let midHighSum = 0;
+                    let peakValue = 0;
+                    let peakBin = -1;
+
+                    for(let i = 0; i < data.length; i++) {
+                        if (i < 4) { 
+                            lowBassSum += data[i];
+                        } else if (i >= 8 && i <= 36) { 
+                            midHighSum += data[i];
+                            if (data[i] > peakValue) {
+                                peakValue = data[i];
+                                peakBin = i;
+                            }
+                        }
+                    }
+
+                    lowBassHistory.push(lowBassSum / 4);
+                    midHighHistory.push(midHighSum / 29);
+                    spectralPeakHistory.push(peakValue > 45 ? peakBin : -1);
+                };
+
+                setTimeout(() => {
+                    stream.getTracks().forEach(track => track.stop());
+                    audioContext.close();
+                    
+                    let validatedCoughCount = 0;
+                    let stableWheezeFrames = 0;
+                    let currentRun = 0;
+                    let normalBreathCount = 0;
+
+                    for (let i = 1; i < lowBassHistory.length; i++) {
+                        let bassDelta = lowBassHistory[i] - lowBassHistory[i-1];
+                        let midHighDelta = midHighHistory[i] - midHighHistory[i-1];
+
+                        if (bassDelta > 20 && midHighHistory[i] < 12) {
+                            normalBreathCount++;
+                        }
+                        
+                        if (bassDelta > 25 && midHighDelta > 18 && midHighHistory[i] > 25) {
+                            validatedCoughCount++;
+                        }
+
+                        if (bassDelta > 2 && bassDelta < 15 && midHighHistory[i] < 10) {
+                            normalBreathCount++;
+                        }
+                    }
+
+                    for (let j = 1; j < spectralPeakHistory.length; j++) {
+                        if (spectralPeakHistory[j] !== -1 && spectralPeakHistory[j] === spectralPeakHistory[j-1]) {
+                            currentRun++;
+                            if (currentRun > stableWheezeFrames) stableWheezeFrames = currentRun;
+                        } else {
+                            currentRun = 0;
+                        }
+                    }
+
+                    if (stableWheezeFrames >= 15) {
+                        detailedAudioStatus = "wheeze";
+                    } else if (validatedCoughCount >= 1) {
+                        detailedAudioStatus = "cough";
+                    } else {
+                        let cycleCheck = 0;
+                        for(let m = 1; m < lowBassHistory.length; m++) {
+                            if (lowBassHistory[m] > 15 && lowBassHistory[m-1] <= 15) cycleCheck++;
+                        }
+                        if (cycleCheck >= 6) {
+                            detailedAudioStatus = "fast";
+                        } else {
+                            detailedAudioStatus = "normal";
+                        }
+                    }
+
+                    btn.innerText = dictionary[currentLang].btn_done;
+                    btn.disabled = false;
+                }, 4000);
+
+            })
+            .catch(function() {
+                setTimeout(() => {
+                    detailedAudioStatus = "normal";
+                    btn.innerText = dictionary[currentLang].btn_done;
+                    btn.disabled = false;
+                }, 1000);
+            });
+        }
+    }
+
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        let pointCalculationSum = 0;
+        for(let i = 1; i <= 8; i++) {
+            let checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
+            if(checkedRadio) pointCalculationSum += parseInt(checkedRadio.value);
+        }
+
+        const outputContainer = document.getElementById("result-display");
+        outputContainer.style.display = "block";
+
+        if (detailedAudioStatus === "normal") outputContainer.className = "alert-success";
+        else if (detailedAudioStatus === "fast" || detailedAudioStatus === "cough") outputContainer.className = "alert-warning";
+        else if (detailedAudioStatus === "wheeze") outputContainer.className = "alert-danger";
+
+        let finalMicString = dictionary[currentLang].status_normal;
+        if (detailedAudioStatus === "fast") finalMicString = dictionary[currentLang].status_fast;
+        if (detailedAudioStatus === "cough") finalMicString = dictionary[currentLang].status_cough;
+        if (detailedAudioStatus === "wheeze") finalMicString = dictionary[currentLang].status_wheeze;
+
+        let finalVerdictText = dictionary[currentLang].safe_msg;
+        if (detailedAudioStatus === "fast" || detailedAudioStatus === "cough" || pointCalculationSum >= 25) finalVerdictText = dictionary[currentLang].warning_msg;
+        if (detailedAudioStatus === "wheeze" || pointCalculationSum >= 45) finalVerdictText = dictionary[currentLang].danger_msg;
+
+        outputContainer.innerHTML = `
+            <div class="result-title">${dictionary[currentLang].res_head}</div>
+            <div class="result-segment"><strong>${dictionary[currentLang].res_score}</strong> ${pointCalculationSum} / 80</div>
+            <div class="result-segment"><strong>${dictionary[currentLang].res_mic_title}</strong><br>${finalMicString}</div>
+            <hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">
+            <div><strong>${finalVerdictText}</strong></div>
+        `;
+        outputContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Run this immediately to populate the missing questions on load
+    renderForm();
+</script>
+
+</body>
+</html>
