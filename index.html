@@ -40,7 +40,6 @@
             padding-bottom: 20px;
         }
 
-        /* 3-Logo Row Styling */
         .logo-container {
             display: flex;
             justify-content: center;
@@ -251,14 +250,12 @@
 <body>
 
 <div class="container">
-    <!-- Language Toggle Bar Component -->
     <div class="lang-switcher">
         <button class="lang-btn" onclick="toggleLanguage('ar')">العربية</button>
         <button class="lang-btn" onclick="toggleLanguage('en')">English</button>
     </div>
 
     <div class="header-section">
-        <!-- Three dynamic logos lined up perfectly -->
         <div class="logo-container">
             <img src="logo.png" alt="Logo 1" class="logo-placeholder" onerror="this.style.display='none'">
             <img src="logo2.png" alt="Logo 2" class="logo-placeholder" onerror="this.style.display='none'">
@@ -269,7 +266,7 @@
     </div>
 
     <form id="asthma-form" onsubmit="handleFormSubmit(event)">
-        <!-- Questions Area -->
+        <!-- Container for Questions 1-10 -->
         <div id="questions-container"></div>
 
         <!-- Question 11 Mic Section -->
@@ -291,23 +288,56 @@
             title: "استبيان فحص أعراض الربو الذكي",
             subtitle: "مدعوم بالذكاء الاصطناعي لمدارس الصدارة",
             points: "10 نقاط",
-            required: "هذا السؤال مطلوب",
             q1: "1. هل تعاني من كحة مستمرة منذ أكثر من 3 أيام؟",
             q1_o1: "لا",
-            q1_o2: "نعم ، كحة جافة",
-            q1_o3: "نعم ، كحة ببلغم ( اخضر او اصفر )",
+            q1_o2: "نعم، كحة جافة",
+            q1_o3: "نعم، كحة ببلغم (أخضر أو أصفر)",
+            
             q2: "2. هل تشعر بـ \"نهجان\" أو ضيق تنفس عند القيام بمجهود بسيط (مثل صعود السلم)؟",
             q2_o1: "لا",
-            q2_o2: "نعم ، تشعر بتعب غير معتاد",
-            q2_o3: "نعم ، اشعر بضيق حتي و انا جالس",
+            q2_o2: "نعم، تشعر بتعب غير معتاد",
+            q2_o3: "نعم، أشعر بضيق حتى وأنا جالس",
+            
             q3: "3. هل عانيت من ارتفاع مفاجئ في درجة الحرارة (أكثر من 38) مع رعشة؟",
             q3_o1: "لا",
-            q3_o2: "نعم ، مرة واحدة",
-            q3_o3: "نعم ، لا تنخفض حتي بخافض حرارة",
+            q3_o2: "نعم، مرة واحدة",
+            q3_o3: "نعم، لا تنخفض حتى بخافض حرارة",
+            
             q4: "4. هل تشعر بألم \"مثل النغزة\" في صدرك عند أخذ نفس عميق أو الكحة؟",
             q4_o1: "لا",
-            q4_o2: "الم بسيط",
-            q4_o3: "نعم الم حاد و واضح",
+            q4_o2: "ألم بسيط",
+            q4_o3: "نعم، ألم حاد وواضح",
+            
+            q5: "5. هل تسمع صوت صفير أو \"تزيق\" في الصدر أثناء التنفس؟",
+            q5_o1: "لا، لا يوجد أي صوت صفير",
+            q5_o2: "نعم، أحياناً عند النوم أو التعرض لغبار",
+            q5_o3: "نعم، صوت واضح ومستمر يسبب لي الضيق",
+            
+            q6: "6. كم مرة استيقظت من النوم خلال الأسبوع الماضي بسبب ضيق التنفس أو الكحة؟",
+            q6_o1: "لم أستيقظ أبداً",
+            q6_o2: "مرة أو مرتين خلال الأسبوع",
+            q6_o3: "أكثر من 3 مرات أو بشكل شبه يومي",
+            
+            q7: "7. هل تزداد هذه الأعراض سوءاً عند التعرض للمثيرات (مثل الروائح القوية، البخور، الغبار، أو الحيوانات البرية)؟",
+            q7_o1: "لا، لا تتأثر",
+            q7_o2: "نعم، أشعر بزيادة بسيطة في الكحة",
+            q7_o3: "نعم، تسبب لي أزمة تنفسية حادة فوراً",
+            
+            q8: "8. هل تحتاج إلى استخدام بخاخ الربو الإسعافي (مثل الفنتولين) بشكل متكرر؟",
+            q8_o1: "لا أستخدمه / لا أحتاجه",
+            q8_o2: "نعم، أستخدمه من وقت لآخر (أقل من 3 مرات أسبوعياً)",
+            q8_o3: "نعم، أستخدمه بكثرة ويومياً تقريباً ولا أشعر بالراحة",
+            
+            q9: "9. هل تؤثر أعراض التنفس الحالية على قدرتك على الذهاب للمدرسة أو ممارسة أنشطتك اليومية؟",
+            q9_o1: "لا تؤثر تماماً",
+            q9_o2: "تؤثر بشكل طفيف وأستطيع التحمل",
+            q9_o3: "نعم، تمنعني تماماً من الحركة والتركيز",
+            
+            q10: "10. هل يوجد تاريخ عائلي مصاب بمرض الربو أو الحساسية الصدرية الحادة؟",
+            q10_o1: "لا يوجد",
+            q10_o2: "نعم، أحد الأقارب من الدرجة الثانية",
+            q10_o3: "نعم، الوالدان أو أحد الإخوة مصاب بشكل مؤكد",
+
             q11_t: "11. اختبار الميكروفون المتقدم (تحليل صوت الصدر بالذكاء الاصطناعي)",
             q11_d: "الرجاء الضغط على الزر أدناه والتنفس بعمق وقوة في الميكروفون لمدة 4 ثوانٍ ليقوم النظام بفحص صوت التزيق أو الإجهاد الحاد.",
             btn_start: "ابدأ التسجيل والتحليل",
@@ -321,23 +351,56 @@
             title: "AI Asthma Symptom Checker",
             subtitle: "Powered by AI for Assadarah Schools",
             points: "10 points",
-            required: "This is a required question",
             q1: "1. Have you been experiencing a persistent cough for more than 3 days?",
             q1_o1: "No",
             q1_o2: "Yes, dry cough",
             q1_o3: "Yes, productive cough (yellow, green)",
+            
             q2: "2. Do you experience shortness of breath or difficulty breathing during mild physical activity (e.g., climbing stairs)?",
             q2_o1: "No",
             q2_o2: "Yes, unusual fatigue",
             q2_o3: "Yes, even when sitting",
+            
             q3: "3. Have you experienced a sudden high fever (above 38°C) accompanied by chills?",
             q3_o1: "No",
             q3_o2: "Yes, Suddenly once",
             q3_o3: "Yes, and not relieved by antipyretics",
+            
             q4: "4. Do you feel a \"sharp, stabbing\" pain in your chest when taking a deep breath or coughing?",
             q4_o1: "No",
             q4_o2: "Mild Pain",
             q4_o3: "YES SEVERE PAIN",
+            
+            q5: "5. Do you hear a whistling or \"wheezing\" sound in your chest while breathing?",
+            q5_o1: "No whistling or wheezing sounds",
+            q5_o2: "Yes, sometimes when sleeping or exposed to dust",
+            q5_o3: "Yes, clear and continuous sound causing discomfort",
+            
+            q6: "6. How many times did you wake up from sleep last week due to shortness of breath or coughing?",
+            q6_o1: "Never woke up",
+            q6_o2: "Once or twice during the week",
+            q6_o3: "More than 3 times or almost daily",
+            
+            q7: "7. Do these symptoms get worse when exposed to triggers (e.g., strong odors, incense, dust, or animals)?",
+            q7_o1: "No, they are not affected",
+            q7_o2: "Yes, I feel a slight increase in coughing",
+            q7_o3: "Yes, it triggers an acute respiratory crisis immediately",
+            
+            q8: "8. Do you need to use a rescue inhaler (like Ventolin) frequently?",
+            q8_o1: "No, I do not use/need it",
+            q8_o2: "Yes, I use it occasionally (less than 3 times a week)",
+            q8_o3: "Yes, I use it heavily, almost daily, and feel no relief",
+            
+            q9: "9. Do your current breathing symptoms affect your ability to go to school or perform daily activities?",
+            q9_o1: "Does not affect at all",
+            q9_o2: "Slightly affects, but manageable",
+            q9_o3: "Yes, completely prevents me from moving or focusing",
+            
+            q10: "10. Is there a verified family history of asthma or severe respiratory allergies?",
+            q10_o1: "No family history",
+            q10_o2: "Yes, a second-degree relative",
+            q10_o3: "Yes, parents or one of the siblings confirmed",
+
             q11_t: "11. Advanced Microphone Check (AI Chest Sound Analysis)",
             q11_d: "Please click the button below and breathe deeply into your microphone for 4 seconds so the system can analyze your breathing rhythms for wheezing or distress signatures.",
             btn_start: "Start Recording & Analysis",
@@ -363,35 +426,35 @@
         document.getElementById("mic-status-btn").innerText = audioAnomalyDetected ? dictionary[currentLang].btn_done : dictionary[currentLang].btn_start;
         document.getElementById("submit-button").innerText = dictionary[currentLang].submit;
 
-        const questionsHTML = `
-            <div class="question-card">
-                <div class="question-title">${dictionary[currentLang].q1}<span class="points-tag">${dictionary[currentLang].points}</span><span class="required-star">*</span></div>
-                <label class="option-label">${dictionary[currentLang].q1_o1}<input type="radio" name="q1" value="0" required><span class="checkmark"></span></label>
-                <label class="option-label">${dictionary[currentLang].q1_o2}<input type="radio" name="q1" value="5"><span class="checkmark"></span></label>
-                <label class="option-label">${dictionary[currentLang].q1_o3}<input type="radio" name="q1" value="10"><span class="checkmark"></span></label>
-            </div>
-
-            <div class="question-card">
-                <div class="question-title">${dictionary[currentLang].q2}<span class="points-tag">${dictionary[currentLang].points}</span><span class="required-star">*</span></div>
-                <label class="option-label">${dictionary[currentLang].q2_o1}<input type="radio" name="q2" value="0" required><span class="checkmark"></span></label>
-                <label class="option-label">${dictionary[currentLang].q2_o2}<input type="radio" name="q2" value="5"><span class="checkmark"></span></label>
-                <label class="option-label">${dictionary[currentLang].q2_o3}<input type="radio" name="q2" value="10"><span class="checkmark"></span></label>
-            </div>
-
-            <div class="question-card">
-                <div class="question-title">${dictionary[currentLang].q3}<span class="points-tag">${dictionary[currentLang].points}</span><span class="required-star">*</span></div>
-                <label class="option-label">${dictionary[currentLang].q3_o1}<input type="radio" name="q3" value="0" required><span class="checkmark"></span></label>
-                <label class="option-label">${dictionary[currentLang].q3_o2}<input type="radio" name="q3" value="5"><span class="checkmark"></span></label>
-                <label class="option-label">${dictionary[currentLang].q3_o3}<input type="radio" name="q3" value="10"><span class="checkmark"></span></label>
-            </div>
-
-            <div class="question-card">
-                <div class="question-title">${dictionary[currentLang].q4}<span class="points-tag">${dictionary[currentLang].points}</span></div>
-                <label class="option-label">${dictionary[currentLang].q4_o1}<input type="radio" name="q4" value="0"><span class="checkmark"></span></label>
-                <label class="option-label">${dictionary[currentLang].q4_o2}<input type="radio" name="q4" value="5"><span class="checkmark"></span></label>
-                <label class="option-label">${dictionary[currentLang].q4_o3}<input type="radio" name="q4" value="10"><span class="checkmark"></span></label>
-            </div>
-        `;
+        let questionsHTML = '';
+        
+        // Loop to generate markup dynamically for all 10 selection questions
+        for (let i = 1; i <= 10; i++) {
+            questionsHTML += `
+                <div class="question-card">
+                    <div class="question-title">
+                        ${dictionary[currentLang]['q' + i]}
+                        <span class="points-tag">${dictionary[currentLang].points}</span>
+                        <span class="required-star">*</span>
+                    </div>
+                    <label class="option-label">
+                        ${dictionary[currentLang]['q' + i + '_o1']}
+                        <input type="radio" name="q${i}" value="0" required>
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="option-label">
+                        ${dictionary[currentLang]['q' + i + '_o2']}
+                        <input type="radio" name="q${i}" value="5">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="option-label">
+                        ${dictionary[currentLang]['q' + i + '_o3']}
+                        <input type="radio" name="q${i}" value="10">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            `;
+        }
         
         document.getElementById("questions-container").innerHTML = questionsHTML;
     }
@@ -463,7 +526,8 @@
         event.preventDefault();
         
         let pointCalculationSum = 0;
-        for(let i = 1; i <= 4; i++) {
+        // Updated condition to safely map all 10 questions into total calculation
+        for(let i = 1; i <= 10; i++) {
             let checkedRadio = document.querySelector(`input[name="q${i}"]:checked`);
             if(checkedRadio) {
                 pointCalculationSum += parseInt(checkedRadio.value);
@@ -473,7 +537,8 @@
         const outputContainer = document.getElementById("result-display");
         outputContainer.style.display = "block";
 
-        if (pointCalculationSum >= 25 || audioAnomalyDetected) {
+        // Threshold optimized for 10 structural assessment metrics
+        if (pointCalculationSum >= 45 || audioAnomalyDetected) {
             outputContainer.className = "alert-danger";
             outputContainer.innerText = dictionary[currentLang].danger_msg;
         } else {
