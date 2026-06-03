@@ -228,10 +228,34 @@
             margin-top: 30px;
             padding: 20px;
             border-radius: 8px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            text-align: right;
             display: none;
+        }
+
+        html[dir="ltr"] #result-display {
+            text-align: left;
+        }
+
+        .result-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .result-segment {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            border-right: 4px solid #333;
+        }
+
+        html[dir="ltr"] .result-segment {
+            border-right: none;
+            border-left: 4px solid #333;
         }
 
         .alert-danger {
@@ -266,7 +290,6 @@
     </div>
 
     <form id="asthma-form" onsubmit="handleFormSubmit(event)">
-        <!-- Dynamic Questions Container -->
         <div id="questions-container"></div>
 
         <!-- Question 9 Mic Section -->
@@ -289,7 +312,6 @@
             subtitle: "مدعوم بالذكاء الاصطناعي لمدارس الصدارة",
             points: "10 نقاط",
             
-            // New 4 Questions
             q1: "1. هل تعاني من كحة مستمرة منذ أكثر من 3 أيام؟",
             q1_o1: "لا",
             q1_o2: "نعم، كحة جافة",
@@ -310,13 +332,12 @@
             q4_o2: "ألم بسيط",
             q4_o3: "نعم، ألم حاد وواضح",
             
-            // Retained Original Questions
             q5: "5. هل يوجد صوت صفير أو تزيق بالصدر أثناء التنفس؟",
             q5_o1: "لا يوجد",
             q5_o2: "أحياناً بشكل خفيف",
             q5_o3: "نعم، صوت واضح ومستمر",
             
-            q6: "6. هل تجد صعوبة في الكلام العادي بسبب مشاكل التنفس؟",
+            q6: "6. هل تجد صعوبة في الكلام العادي بسبب مشاكل التنفس?",
             q6_o1: "لا، أتكلم بشكل طبيعي",
             q6_o2: "صعوبة بسيطة تظهر عند بذل مجهود",
             q6_o3: "نعم، أجد صعوبة بالغة في إكمال جملة واحدة",
@@ -337,15 +358,20 @@
             btn_process: "جاري تحليل نمط التنفس وعزل الصوت عبر الذكاء الاصطناعي...",
             btn_done: "تم التحليل بنجاح ✔",
             submit: "عرض النتيجة الحيوية",
-            safe_msg: "وضعك مستقر حالياً ولا توجد علامات حادة. يرجى المتابعة وأخذ قسط من الراحة.",
-            danger_msg: "تحذير طوارئ: المؤشرات الحيوية الرقمية وصوت التنفس يشيران إلى تزيق (Wheezing) حاد أو إجهاد تنفسي شديد. يرجى التوجه إلى المستشفى فوراً!"
+            
+            res_head: "تقرير التحليل الطبي الرقمي",
+            res_score: "مجموع نقاط الاستبيان: ",
+            res_mic_title: "نتيجة فحص الميكروفون (الذكاء الاصطناعي): ",
+            res_mic_danger: "⚠️ تم رصد نمط تنفس متسارع أو صوت تزيق (Wheezing) حاد في الصدر!",
+            res_mic_safe: "✅ صوت التنفس مستقر ونقي. لم يتم رصد إشارات تزيق أو انسداد هوائي حاد.",
+            safe_msg: "النتيجة النهائية: وضعك مستقر حالياً ولا توجد علامات طارئة. يرجى المتابعة وأخذ قسط من الراحة.",
+            danger_msg: "تحذير طوارئ: المؤشرات الرقمية الإجمالية تشير إلى احتمالية وجود أزمة تنفسية حادة. يرجى التوجه إلى المستشفى فوراً!"
         },
         en: {
             title: "AI Asthma Symptom Checker",
             subtitle: "Powered by AI for Assadarah Schools",
             points: "10 points",
             
-            // New 4 Questions
             q1: "1. Have you been experiencing a persistent cough for more than 3 days?",
             q1_o1: "No",
             q1_o2: "Yes, dry cough",
@@ -366,7 +392,6 @@
             q4_o2: "Mild pain",
             q4_o3: "Yes, severe sharp pain",
             
-            // Retained Original Questions
             q5: "5. Is there a whistling or wheezing sound in your chest while breathing?",
             q5_o1: "No noise",
             q5_o2: "Sometimes mild",
@@ -393,8 +418,14 @@
             btn_process: "AI is analyzing breathing patterns and noise isolating...",
             btn_done: "Analysis Completed ✔",
             submit: "View Vital Analysis Results",
-            safe_msg: "Your status is currently stable. No severe symptoms or dangerous noise patterns detected. Please rest.",
-            danger_msg: "EMERGENCY WARNING: Survey score arrays and real-time audio analysis indicate acute wheezing or severe respiratory distress. Please proceed to the nearest hospital immediately!"
+            
+            res_head: "Digital Medical Analysis Report",
+            res_score: "Total Survey Score: ",
+            res_mic_title: "Microphone Scan Result (AI Analysis): ",
+            res_mic_danger: "⚠️ High frequency spikes or acute wheezing patterns detected in your breath recording!",
+            res_mic_safe: "✅ Breathing audio is stable and clear. No severe wheezing or airway obstruction signals caught.",
+            safe_msg: "Final Verdict: Your status is currently stable. No emergency alert triggered. Please take rest.",
+            danger_msg: "EMERGENCY WARNING: Aggregated data parameters show critical respiratory metrics. Please proceed to the hospital immediately!"
         }
     };
 
@@ -413,7 +444,6 @@
         document.getElementById("submit-button").innerText = dictionary[currentLang].submit;
 
         let questionsHTML = '';
-        // Loops through all 8 choice-based questions seamlessly
         for (let i = 1; i <= 8; i++) {
             questionsHTML += `
                 <div class="question-card">
@@ -486,6 +516,7 @@
                     audioContext.close();
                     
                     let maximumSpike = Math.max(...frequencyFrequencies);
+                    // Captures your rapid breathing or sound spikes instantly
                     if (maximumSpike > 35) { 
                         audioAnomalyDetected = true; 
                     } else {
@@ -521,14 +552,20 @@
         const outputContainer = document.getElementById("result-display");
         outputContainer.style.display = "block";
 
-        // Logic adjusted for 8 active questionnaire fields (Max 80 points)
-        if (pointCalculationSum >= 35 || audioAnomalyDetected) {
-            outputContainer.className = "alert-danger";
-            outputContainer.innerText = dictionary[currentLang].danger_msg;
-        } else {
-            outputContainer.className = "alert-success";
-            outputContainer.innerText = dictionary[currentLang].safe_msg;
-        }
+        let isDangerous = (pointCalculationSum >= 35 || audioAnomalyDetected);
+        outputContainer.className = isDangerous ? "alert-danger" : "alert-success";
+
+        // Separate and distinct text strings showing live diagnostic data feedback
+        let micResultText = audioAnomalyDetected ? dictionary[currentLang].res_mic_danger : dictionary[currentLang].res_mic_safe;
+        let finalVerdictText = isDangerous ? dictionary[currentLang].danger_msg : dictionary[currentLang].safe_msg;
+
+        outputContainer.innerHTML = `
+            <div class="result-title">${dictionary[currentLang].res_head}</div>
+            <div class="result-segment"><strong>${dictionary[currentLang].res_score}</strong> ${pointCalculationSum} / 80</div>
+            <div class="result-segment"><strong>${dictionary[currentLang].res_mic_title}</strong><br>${micResultText}</div>
+            <hr style="border:0; border-top:1px solid #ccc; margin:15px 0;">
+            <div><strong>${finalVerdictText}</strong></div>
+        `;
         
         outputContainer.scrollIntoView({ behavior: 'smooth' });
     }
