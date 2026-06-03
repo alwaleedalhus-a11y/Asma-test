@@ -210,20 +210,6 @@
             100% { opacity: 0.6; }
         }
 
-        .submit-btn {
-            display: block;
-            width: 100%;
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 14px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 25px;
-        }
-
         #result-display {
             margin-top: 30px;
             padding: 20px;
@@ -268,6 +254,20 @@
             background-color: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
         }
     </style>
 </head>
@@ -337,7 +337,7 @@
             q5_o2: "أحياناً بشكل خفيف",
             q5_o3: "نعم، صوت واضح ومستمر",
             
-            q6: "6. هل تجد صعوبة في الكلام العادي بسبب مشاكل التنفس?",
+            q6: "6. هل تجد صعوبة في الكلام العادي بسبب مشاكل التنفس؟",
             q6_o1: "لا، أتكلم بشكل طبيعي",
             q6_o2: "صعوبة بسيطة تظهر عند بذل مجهود",
             q6_o3: "نعم، أجد صعوبة بالغة في إكمال جملة واحدة",
@@ -485,8 +485,17 @@
         btn.innerText = dictionary[currentLang].btn_process;
         btn.disabled = true;
 
+        // Disabling browser hardware filters so it hears real breathing/blowing actions
+        const audioConstraints = {
+            audio: {
+                echoCancellation: false,
+                noiseSuppression: false,
+                autoGainControl: false
+            }
+        };
+
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ audio: true })
+            navigator.mediaDevices.getUserMedia(audioConstraints)
             .then(function(stream) {
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 const analyser = audioContext.createAnalyser();
@@ -498,26 +507,28 @@
                 analyser.connect(processor);
                 processor.connect(audioContext.destination);
 
-                let frequencyFrequencies = [];
+                let levelTrackArray = [];
 
                 processor.onaudioprocess = function() {
                     let data = new Uint8Array(analyser.frequencyBinCount);
                     analyser.getByteFrequencyData(data);
                     
-                    let highSum = 0;
-                    for(let i = 120; i < data.length; i++) {
-                        highSum += data[i];
+                    let totalSum = 0;
+                    for(let i = 0; i < data.length; i++) {
+                        totalSum += data[i];
                     }
-                    frequencyFrequencies.push(highSum / (data.length - 120));
+                    let averageVolume = totalSum / data.length;
+                    levelTrackArray.push(averageVolume);
                 };
 
                 setTimeout(() => {
                     stream.getTracks().forEach(track => track.stop());
                     audioContext.close();
                     
-                    let maximumSpike = Math.max(...frequencyFrequencies);
-                    // Captures your rapid breathing or sound spikes instantly
-                    if (maximumSpike > 35) { 
+                    let highestVolumeObserved = Math.max(...levelTrackArray);
+                    
+                    // A lower threshold of 12 ensures fast breathing/heavy blowing triggers the alert effortlessly
+                    if (highestVolumeObserved > 12) { 
                         audioAnomalyDetected = true; 
                     } else {
                         audioAnomalyDetected = false; 
@@ -530,7 +541,7 @@
             })
             .catch(function(err) {
                 setTimeout(() => {
-                    audioAnomalyDetected = Math.random() < 0.3; 
+                    audioAnomalyDetected = true; 
                     btn.innerText = dictionary[currentLang].btn_done;
                     btn.disabled = false;
                 }, 2000);
@@ -555,7 +566,6 @@
         let isDangerous = (pointCalculationSum >= 35 || audioAnomalyDetected);
         outputContainer.className = isDangerous ? "alert-danger" : "alert-success";
 
-        // Separate and distinct text strings showing live diagnostic data feedback
         let micResultText = audioAnomalyDetected ? dictionary[currentLang].res_mic_danger : dictionary[currentLang].res_mic_safe;
         let finalVerdictText = isDangerous ? dictionary[currentLang].danger_msg : dictionary[currentLang].safe_msg;
 
