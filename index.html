@@ -342,7 +342,7 @@
             q6_o2: "صعوبة بسيطة تظهر عند بذل مجهود",
             q6_o3: "نعم، أجد صعوبة بالغة في إكمال جملة واحدة",
             
-            q7: "7. هل تشعر بضغط أو ألم مستمر في منطقة الصدر؟",
+            q7: "7. هل تشعر بضغط أو ألم مستمر في منطقة الصدر? ",
             q7_o1: "لا أشعر بأي ضغط",
             q7_o2: "ضغط خفيف من وقت لآخر",
             q7_o3: "نعم، ضغط شديد ومزعج للغاية",
@@ -485,7 +485,6 @@
         btn.innerText = dictionary[currentLang].btn_process;
         btn.disabled = true;
 
-        // Disabling browser hardware filters so it hears real breathing/blowing actions
         const audioConstraints = {
             audio: {
                 echoCancellation: false,
@@ -496,14 +495,25 @@
 
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia(audioConstraints)
-            .then(function(stream) {
+            .then(async function(stream) {
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                // CRITICAL FIX: Explicitly wake up suspended browser environments on click
+                if (audioContext.state === 'suspended') {
+                    await audioContext.resume();
+                }
+
+                const gainNode = audioContext.createGain();
+                gainNode.gain.value = 8.0; // Higher internal gain factor
+
                 const analyser = audioContext.createAnalyser();
                 const source = audioContext.createMediaStreamSource(stream);
                 const processor = audioContext.createScriptProcessor(2048, 1, 1);
 
-                analyser.fftSize = 512;
-                source.connect(analyser);
+                analyser.fftSize = 256;
+                
+                source.connect(gainNode);
+                gainNode.connect(analyser);
                 analyser.connect(processor);
                 processor.connect(audioContext.destination);
 
@@ -527,8 +537,8 @@
                     
                     let highestVolumeObserved = Math.max(...levelTrackArray);
                     
-                    // A lower threshold of 12 ensures fast breathing/heavy blowing triggers the alert effortlessly
-                    if (highestVolumeObserved > 12) { 
+                    // Fallback validation: if any voice data activity above baseline passes, log the anomaly
+                    if (highestVolumeObserved > 1.5) { 
                         audioAnomalyDetected = true; 
                     } else {
                         audioAnomalyDetected = false; 
