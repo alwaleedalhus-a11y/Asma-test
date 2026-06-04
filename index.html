@@ -196,6 +196,17 @@
             cursor: not-allowed;
         }
 
+        /* Styling for your new AI label */
+        .ai-label {
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #555;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         #result-display {
             margin-top: 30px;
             padding: 20px;
@@ -245,7 +256,7 @@
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
-            margin-top: 25px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -259,7 +270,6 @@
 
     <div class="header-section">
         <div class="logo-container">
-            <!-- Ensure images point to correct URLs or names on your server -->
             <img src="logo.png" alt="Logo 1" class="logo-placeholder" onerror="this.style.opacity='0'">
             <img src="logo2.png" alt="Logo 2" class="logo-placeholder" onerror="this.style.opacity='0'">
             <img src="logo3.png" alt="Logo 3" class="logo-placeholder" onerror="this.style.opacity='0'">
@@ -269,7 +279,6 @@
     </div>
 
     <form id="asthma-form" onsubmit="handleFormSubmit(event)">
-        <!-- The 8 dynamic questions will render perfectly here -->
         <div id="questions-container"></div>
 
         <!-- Question 9 Mic Section -->
@@ -278,6 +287,9 @@
             <p id="q11-desc">الرجاء الضغط على الزر أدناه والتنفس أو السعال بوضوح في الميكروفون لمدة 4 ثوانٍ ليقوم النظام بتحليل نمط المنحنى الموجي الفعلي.</p>
             <button type="button" id="mic-status-btn" class="mic-btn" onclick="startBreathingAnalysis()">ابدأ التسجيل والتحليل</button>
         </div>
+
+        <!-- NEW: Artificial Intelligence Subtext right below the mic layout -->
+        <div class="ai-label">Artificial Intelligence🤖</div>
 
         <button type="submit" id="submit-button" class="submit-btn">عرض النتيجة الحيوية</button>
     </form>
@@ -293,7 +305,7 @@
             points: "10 نقاط",
             q1: "1. هل تعاني من كحة مستمرة منذ أكثر من 3 أيام؟",
             q1_o1: "لا", q1_o2: "نعم، كحة جافة", q1_o3: "نعم، كحة ببلغم (أخضر أو أصفر)",
-            q2: "2. هل تشعر بـ \"نهجان\" أو ضيق تنفس عند القيام بمجهود بسيط (مثل صعود السلم)？",
+            q2: "2. هل تشعر بـ \"نهجان\" أو ضيق تنفس عند القيام بمجهود بسيط (مثل صعود السلم)؟",
             q2_o1: "لا", q2_o2: "نعم، تشعر بتعب غير معتاد", q2_o3: "نعم، أشعر بضيق حتى وأنا جالس",
             q3: "3. هل عانيت من ارتفاع مفاجئ في درجة الحرارة (أكثر من 38) مع رعشة؟",
             q3_o1: "لا", q3_o2: "نعم، مرة واحدة", q3_o3: "نعم، لا تنخفض حتى بخافض حرارة",
@@ -301,7 +313,7 @@
             q4_o1: "لا", q4_o2: "ألم بسيط", q4_o3: "نعم، ألم حاد وواضح",
             q5: "5. هل يوجد صوت صفير أو تزيق بالصدر أثناء التنفس؟",
             q5_o1: "لا يوجد", q5_o2: "أحياناً بشكل خفيف", q5_o3: "نعم، صوت واضح ومستمر",
-            q6: "6. هل تجد صعوبة في الكلام العادي بسبب مشاكل التنفس؟",
+            q6: "6. هل تجد صعوبة في الكلام العادي بسبب مشاكل التنفس？",
             q6_o1: "لا، أتكلم بشكل طبيعي", q6_o2: "صعوبة بسيطة تظهر عند بذل مجهود", q6_o3: "نعم، أجد صعوبة بالغة في إكمال جملة واحدة",
             q7: "7. هل تشعر بضغط أو ألم مستمر في منطقة الصدر؟",
             q7_o1: "لا أشعر بأي ضغط", q7_o2: "ضغط خفيف من وقت لآخر", q7_o3: "نعم، ضغط شديد ومزعج للغاية",
@@ -310,7 +322,7 @@
             q11_t: "9. اختبار الميكروفون المتقدم (الفلترة الطيفية لمنع تداخل الهواء)",
             q11_d: "اضغط على الزر وتحدث أو تنفس بالقرب من الميكروفون. يقوم النظام بعزل تشويش اصطدام الهواء بالكبسولة لضمان دقة النتيجة.",
             btn_start: "ابدأ التسجيل والتحليل",
-            btn_process: "جاري تحليل المصفوفة الطيفية وعزل التيارات الهوائية القريبة...",
+            btn_process: "جاري تحليل مصفوفة البيانات الصوتية طيفياً...",
             btn_done: "تم التحليل بنجاح ✔",
             submit: "عرض النتيجة الحيوية",
             res_head: "تقرير التحليل الطبي الرقمي",
@@ -561,7 +573,6 @@
         outputContainer.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Run this immediately to populate the missing questions on load
     renderForm();
 </script>
 
